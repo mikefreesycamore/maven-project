@@ -1,8 +1,15 @@
 pipeline {
 	agent any
-	tools {
-		jdk  'JAVA_HOME'
+
+	parameters {
+		string(name: 'tomcat_dev', defaultValue: '3.19.221.237', description: 'Development Server')
+		string(name: 'tomcat_prod', defaultValue: '3.25.232.162', description: 'Production Server')
 	}
+
+	triggers {
+		pollscm('* * * * *')
+	}
+
 	stages{
 		stage('Build'){
 			steps {
@@ -15,27 +22,25 @@ pipeline {
 				}
 			}
 		}
-		stage('Deploy to Staging') {
-			steps {
-				build job: 'Deploy-to-staging'
-			}
-		}
-		stage('Deploy to production'){
-			steps {
-				timeout(time:5, unit:'DAYS'){
-					input message: 'Approve Production Deployment?'
-				}
-				build job: 'deploy-to-prod'
-			}
-			post {
-				success {
-					echo 'Code deployed to Production.'
+
+		stage ('Deployments') {
+			parallel {
+				stage ('Deploy to staging') {
+					steps {
+						bat 'scp-tomcat-stag.bat'
+					}
 				}
 
-				failure {
-					echo 'Deployment failed.'
+				stage ('Deploy to production') {
+					steps {
+						bat 'scp-tomcat-prod.bat'
+					}
 				}
+
 			}
 		}
+
 	}
+
 }
+
