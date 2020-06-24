@@ -21,6 +21,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
+  - script: echo hello from Linux    
 
 - job: windows
   pool:
@@ -37,6 +38,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
+  - script: echo hello from Windows    
 
 - job: macOS
   pool:
@@ -53,3 +55,4 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
+  - script: echo hello from macOS    
