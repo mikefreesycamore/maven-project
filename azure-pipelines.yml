@@ -6,7 +6,7 @@ trigger:
 - master
 
 jobs:
-  job: linux
+- job: linux
   pool:
     vmImage: 'ubuntu-latest'
 
@@ -22,7 +22,7 @@ jobs:
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
 
-  job: windows
+- job: windows
   pool:
     vmImage: 'windows-latest'
 
@@ -38,7 +38,7 @@ jobs:
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
 
- job: macOS
+- job: macOS
   pool:
     vmImage: 'macOS-latest'
 
