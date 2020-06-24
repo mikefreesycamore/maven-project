@@ -21,7 +21,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-  - script: echo hello from Linux; pwd; ls -al; docker run hello-world ; whoami  
+  - script: echo hello from Linux; pwd; ls -al; docker run hello-world ; whoami; lsb_release -a  
 
 - job: windows
   pool:
