@@ -21,7 +21,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-  - script: ls -al /var/run/docker.sock  
+  - script: ls -al /var/run/docker.sock; groups   
 
 - job: windows
   pool:
