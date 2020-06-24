@@ -21,7 +21,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-  - script: echo hello from Linux; pwd; ls -al    
+  - script: echo hello from Linux; pwd; ls -al; find / -name docker.sock    
 
 - job: windows
   pool:
