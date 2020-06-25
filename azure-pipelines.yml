@@ -7,8 +7,9 @@ trigger:
 
 jobs:
 - job: linux
-  pool: default
-    
+  pool:
+    vmImage: 'ubuntu-20.04'
+
   steps:
   - task: Maven@3
     inputs:
@@ -20,7 +21,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-  - script: ls -al /var/run/docker.sock; groups  
+  - script: ls -al /var/run/docker.sock; groups; git --version; mvn --version  
 
 - job: windows
   pool:
