@@ -18,7 +18,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-  - script: cd ~/projects;  git clone git@github.com:mikefreesycamore/maven-project.git; ls -al
+  - script: cd ~/projects; rm -fR maven-project; git clone git@github.com:mikefreesycamore/maven-project.git; cd maven-project; packer validate azure_packer_test_windows.json
 
 - job: windows
   pool:
