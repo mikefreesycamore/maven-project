@@ -1,0 +1,46 @@
+{
+    "builders": [
+        {
+            "type": "azure-arm",
+            "subscription_id": "af4fd7fd-9df7-4bc8-95f1-714320792ec8",
+            "client_id": "{{user `47b85f87-ca0e-4a92-a48e-d30e4fcacb78`}}",
+            "client_secret": "{{user `4W3331.8cfx0q-f.hgYDFU9LW6wTUUel_-`}}",
+            "tenant_id": "{{user `7621d1ee-ab15-4f30-9825-933efaaa5bf5`}}",
+            "managed_image_resource_group_name": "my_group",
+            "managed_image_name": "customLinux-{{isotime \"2006-01-02-24\"}}",
+            "os_type": "Windows",
+            "image_publisher": "MicrosoftWindowsServer",
+            "image_offer": "WindowsServer",
+            "image_sku": "2019-Datacenter-with-Containers",
+
+            "communicator": "winrm",
+            "winrm_use_ssl": true,
+            "winrm_insecure": true,
+            "winrm_timeout": "5m",
+            "winrm_username": "packer",
+
+            "azure_tags": {
+                "dept": "DevOps",
+                "task": "Image deployment"
+            },
+            "location": "East US",
+            "vm_size": "Standard_DS2_v2"
+        }
+    ],
+    "provisioners": [
+
+        {
+            "type": "file",
+            "source": "C:\\users\\mfriedberg\\downloads\\Git-2.27.0-64-bit.exe",
+            "destination": "C:\\Users\\packer\\"
+        },
+        {
+            "type": "windows-shell",
+            "inline": [
+                "Git-2.27.0-64-bit.exe",
+                "where docker",
+                "where git"
+            ]
+        }
+    ]
+}

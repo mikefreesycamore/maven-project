@@ -1,0 +1,42 @@
+{
+    "builders": [
+        {
+            "type": "azure-arm",
+            "subscription_id": "af4fd7fd-9df7-4bc8-95f1-714320792ec8",
+            "client_id": "{{user `47b85f87-ca0e-4a92-a48e-d30e4fcacb78`}}",
+            "client_secret": "{{user `4W3331.8cfx0q-f.hgYDFU9LW6wTUUel_-`}}",
+            "tenant_id": "{{user `7621d1ee-ab15-4f30-9825-933efaaa5bf5`}}",
+            "managed_image_resource_group_name": "my_group",
+            "managed_image_name": "customLinux-{{isotime \"2006-01-02-24\"}}",
+            "os_type": "Linux",
+            "image_publisher": "Canonical",
+            "image_offer": "UbuntuServer",
+            "image_sku": "18.04",
+            "azure_tags": {
+                "dept": "DevOps",
+                "task": "Image deployment"
+            },
+            "location": "East US",
+            "vm_size": "Standard_DS2_v2"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "sudo apt-get -y update",
+		"sudo apt install git -y",
+		"git --version",
+		"ls -al",
+		"pwd",
+		"sudo apt-get remove docker docker-engine docker.io -y",
+		"sudo apt install docker.io -y",
+		"sudo systemctl start docker",
+		"sudo systemctl enable docker",
+		"docker --version",
+		"mkdir hitchcock; cd hitchcock",
+		"ls -al ~/.ssh"
+            ]
+        }
+    ]
+}
