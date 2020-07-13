@@ -28,16 +28,9 @@
         }
     ],
     "provisioners": [
-
-        {
-            "type": "file",
-            "source": "C:\\users\\mfriedberg\\downloads\\Git-2.27.0-64-bit.exe",
-            "destination": "C:\\Users\\packer\\"
-        },
         {
             "type": "windows-shell",
             "inline": [
-                "Git-2.27.0-64-bit.exe",
                 "where docker",
                 "where git"
             ]
